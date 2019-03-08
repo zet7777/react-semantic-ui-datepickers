@@ -117,8 +117,8 @@ storiesOf('Examples', module)
   ))
   .add('Basic as form component', () => (
     <Content>
-      <Form>
-        <Form.Group width="equals">
+      <Form style={{ width: '100%' }}>
+        <Form.Group widths="equal">
           <SemanticDatepicker
             label="Birth date"
             id="birthDate"

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import isEqual from 'react-fast-compare';
 import isValid from 'date-fns/is_valid';
 import formatStringByPattern from 'format-string-by-pattern';
+import { Popup, TransitionablePortal } from 'semantic-ui-react';
 import {
   formatSelectedDate,
   moveElementsByN,
@@ -49,6 +50,7 @@ const semanticInputProps = [
   'size',
   'transparent',
   'readOnly',
+  'width',
 ];
 
 class SemanticDatepicker extends React.Component {
@@ -165,11 +167,11 @@ class SemanticDatepicker extends React.Component {
   mousedownCb = mousedownEvent => {
     const { isVisible } = this.state;
 
-    if (isVisible && this.el) {
-      if (!this.el.contains(mousedownEvent.target)) {
-        this.close();
-      }
-    }
+    // if (isVisible && this.el) {
+    //   if (!this.el.contains(mousedownEvent.target)) {
+    //     this.close();
+    //   }
+    // }
   };
 
   keydownCb = keydownEvent => {
@@ -341,14 +343,11 @@ class SemanticDatepicker extends React.Component {
       typedValue,
     } = this.state;
     const { clearable, locale, pointing, filterDate } = this.props;
+
+    console.log(this.el);
+
     return (
-      <div
-        className="field"
-        style={style}
-        ref={el => {
-          this.el = el;
-        }}
-      >
+      <React.Fragment>
         <Input
           {...this.inputProps}
           isClearIconVisible={Boolean(clearable && selectedDateFormatted)}
@@ -358,28 +357,33 @@ class SemanticDatepicker extends React.Component {
           onClick={this.showCalendar}
           onKeyDown={this.handleKeyDown}
           value={typedValue || selectedDateFormatted}
+          ref={el => {
+            this.el = el;
+          }}
         />
-        {isVisible && (
-          <this.Component
-            {...this.dayzedProps}
-            monthsToDisplay={this.isRangeInput ? 2 : 1}
-            onChange={this.onDateSelected}
-            selected={selectedDate}
-            date={this.date}
-          >
-            {props => (
-              <Calendar
-                {...this.dayzedProps}
-                {...props}
-                {...locale}
-                filterDate={filterDate}
-                pointing={pointing}
-                weekdays={this.weekdays}
-              />
-            )}
-          </this.Component>
-        )}
-      </div>
+        <TransitionablePortal open={isVisible}>
+          <Popup open context={this.el}>
+            <this.Component
+              {...this.dayzedProps}
+              monthsToDisplay={this.isRangeInput ? 2 : 1}
+              onChange={this.onDateSelected}
+              selected={selectedDate}
+              date={this.date}
+            >
+              {props => (
+                <Calendar
+                  {...this.dayzedProps}
+                  {...props}
+                  {...locale}
+                  filterDate={filterDate}
+                  pointing={pointing}
+                  weekdays={this.weekdays}
+                />
+              )}
+            </this.Component>
+          </Popup>
+        </TransitionablePortal>
+      </React.Fragment>
     );
   }
 }

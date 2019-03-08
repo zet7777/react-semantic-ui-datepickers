@@ -2,27 +2,31 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Icon } from 'semantic-ui-react';
 
-const CustomInput = ({
-  icon,
-  isClearIconVisible,
-  onClear,
-  onClick,
-  value,
-  ...rest
-}) => (
-  <Form.Input
-    {...rest}
-    icon={
-      <Icon
-        link
-        name={isClearIconVisible ? 'close' : icon}
-        onClick={isClearIconVisible ? onClear : onClick}
-      />
-    }
-    onClick={onClick}
-    value={value}
-  />
-);
+// eslint-disable-next-line
+class CustomInput extends React.PureComponent {
+  render() {
+    const {
+      innerRef,
+      icon,
+      isClearIconVisible,
+      onClear,
+      onClick,
+      value,
+      ...rest
+    } = this.props;
+
+    return (
+      <Form.Input {...rest} icon onClick={onClick}>
+        <Icon
+          link
+          name={isClearIconVisible ? 'close' : icon}
+          onClick={isClearIconVisible ? onClear : onClick}
+        />
+        <input ref={innerRef} value={value} />
+      </Form.Input>
+    );
+  }
+}
 
 CustomInput.propTypes = {
   icon: PropTypes.string,
