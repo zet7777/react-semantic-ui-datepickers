@@ -21,6 +21,7 @@ const CustomInput = ({
     }
     onClick={onClick}
     value={value}
+    style={{ width: 117 }} // force minimal
   />
 );
 

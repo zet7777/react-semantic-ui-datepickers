@@ -36,6 +36,7 @@ export interface SemanticDatepickerProps {
   size?: SemanticSIZES;
   transparent?: boolean;
   type: 'basic' | 'range';
+  pointing?: 'left' | 'right' | 'top left' | 'top right';
 }
 
 declare class SemanticDatepicker extends React.Component<
