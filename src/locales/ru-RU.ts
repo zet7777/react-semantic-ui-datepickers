@@ -1,8 +1,8 @@
 export default {
   todayButton: 'Cегодня',
   nextMonth: 'Следующий месяц',
-  previousMonth: 'Прошлый месяц',
-  nextYear: 'В следующем году',
+  previousMonth: 'Предыдущий месяц',
+  nextYear: 'Следующий год',
   previousYear: 'Предыдущий год',
   weekdays: ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'],
   months: [
