@@ -49,6 +49,7 @@ const semanticInputProps = [
   'size',
   'transparent',
   'readOnly',
+  'tabIndex',
 ];
 
 class SemanticDatepicker extends React.Component {
