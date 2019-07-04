@@ -36,9 +36,14 @@ export const formatDate = (date, dateFormat) => {
 
   // если сокращенный месяц в конце, обрезаем с 4х до 3х букв
   if (dateFormat.endsWith(' MMM')) {
-    if (result.endsWith('март')) result = result.slice(0, -1);
-    else if (result.endsWith('июнь')) result = result.slice(0, -1);
-    else if (result.endsWith('июль')) result = result.slice(0, -1);
+    if (
+      result.endsWith('март') ||
+      result.endsWith('июнь') ||
+      result.endsWith('июль') ||
+      result.endsWith('нояб') ||
+      result.endsWith('сент')
+    )
+      result = result.slice(0, -1);
   }
 
   return result;
