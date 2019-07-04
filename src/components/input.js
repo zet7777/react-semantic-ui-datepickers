@@ -13,15 +13,18 @@ const CustomInput = ({
   <Form.Input
     {...rest}
     icon={
-      <Icon
-        link
-        name={isClearIconVisible ? 'close' : icon}
-        onClick={isClearIconVisible ? onClear : onClick}
-      />
+      icon ? (
+        <Icon
+          link
+          name={isClearIconVisible ? 'close' : icon}
+          onClick={isClearIconVisible ? onClear : onClick}
+        />
+      ) : (
+        undefined
+      )
     }
     onClick={onClick}
     value={value}
-    style={{ width: 117 }} // force minimal
   />
 );
 

@@ -1,6 +1,7 @@
 import format from 'date-fns/format';
 import isBefore from 'date-fns/is_before';
 import startOfDay from 'date-fns/start_of_day';
+import localeRu from 'date-fns/locale/ru';
 import dateFnsV2 from '../date-fns-v2';
 
 export const isSelectable = (date, minDate, maxDate) => {
@@ -25,8 +26,23 @@ export const getToday = (minDate, maxDate) => {
   };
 };
 
-export const formatDate = (date, dateFormat) =>
-  date ? format(startOfDay(date), dateFormat) : undefined;
+export const formatDate = (date, dateFormat) => {
+  if (!date) return undefined;
+
+  // форматировать и подкорректировать результат
+  let result = format(startOfDay(date), dateFormat, { locale: localeRu });
+  if (result.endsWith('.')) result = result.slice(0, -1); // убираем точку в конце месяца, например 'авг.'
+  result = result.charAt(0).toUpperCase() + result.slice(1); // делаем первую букву заглавной, например 'пт, 15'
+
+  // если сокращенный месяц в конце, обрезаем с 4х до 3х букв
+  if (dateFormat.endsWith(' MMM')) {
+    if (result.endsWith('март')) result = result.slice(0, -1);
+    else if (result.endsWith('июнь')) result = result.slice(0, -1);
+    else if (result.endsWith('июль')) result = result.slice(0, -1);
+  }
+
+  return result;
+};
 
 export const omit = (keysToOmit, obj) => {
   const newObj = { ...obj };

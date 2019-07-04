@@ -18,7 +18,7 @@ export interface SemanticDatepickerProps {
   error?: boolean;
   firstDayOfWeek?: number;
   format?: string;
-  icon?: SemanticICONS;
+  icon?: SemanticICONS | null;
   iconPosition?: 'left';
   id?: string;
   keepOpenOnClear?: boolean;
@@ -38,6 +38,7 @@ export interface SemanticDatepickerProps {
   type: 'basic' | 'range';
   pointing?: 'left' | 'right' | 'top left' | 'top right';
   tabIndex?: number;
+  readOnly?: boolean;
 }
 
 declare class SemanticDatepicker extends React.Component<
