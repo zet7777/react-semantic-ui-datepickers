@@ -85,7 +85,7 @@ class SemanticDatepicker extends React.Component {
     format: 'YYYY-MM-DD',
     keepOpenOnClear: false,
     keepOpenOnSelect: false,
-    clearOnSameDateClick: true,
+    clearOnSameDateClick: false,
     locale: localeEn,
     onBlur: () => {},
     placeholder: null,
