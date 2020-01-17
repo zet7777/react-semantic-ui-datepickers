@@ -15,6 +15,6 @@ module.exports = {
       'src/locales': 'dist/locales',
       'src/index.d.ts': 'dist/index.d.ts',
     }),
-    postcss({ extract: true, minimize: true }),
+    postcss({ extract: true }),
   ].concat(rollupConfig.plugins),
 };
